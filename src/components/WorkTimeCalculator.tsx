@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Calculator, Clock, Euro, Timer, TrendingUp, Sparkles, History, Trash2, RotateCcw, Settings } from 'lucide-react'
+import { Calculator, Clock, Euro, Timer, TrendingUp, History, Trash2, RotateCcw, Settings } from 'lucide-react'
 import { HistoryComparisonChart } from '@/components/charts/HistoryComparisonChart'
 
 interface CalculationResult {
@@ -206,7 +206,7 @@ export function WorkTimeCalculator() {
         </div>
       )}
       
-      <style jsx>{`
+      <style>{`
         @keyframes fall {
           to {
             transform: translateY(120vh) rotate(360deg);
