@@ -40,9 +40,9 @@ const loadHistoryFromStorage = (): HistoryEntry[] => {
   try {
     const stored = localStorage.getItem(STORAGE_KEY)
     if (!stored) return []
-    const parsed = JSON.parse(stored)
+    const parsed = JSON.parse(stored) as (Omit<HistoryEntry, 'timestamp'> & { timestamp: string })[]
     // Convert timestamp strings back to Date objects
-    return parsed.map((entry: any) => ({
+    return parsed.map((entry) => ({
       ...entry,
       timestamp: new Date(entry.timestamp)
     }))
@@ -123,7 +123,7 @@ export function WorkTimeCalculator() {
     const workingHours = Math.floor(remainingWorkHours)
     const workingMinutes = Math.round((remainingWorkHours - workingHours) * 60)
 
-    const calculationResult = {
+    const calculationResult: CalculationResult = {
       days,
       hours,
       minutes,
@@ -154,7 +154,7 @@ export function WorkTimeCalculator() {
         result: calculationResult
       }
 
-      const newHistory = [historyEntry, ...history].slice(0, 10) // Keep only last 10 entries
+      const newHistory: HistoryEntry[] = [historyEntry, ...history].slice(0, 10) // Keep only last 10 entries
       setHistory(newHistory)
       saveHistoryToStorage(newHistory)
     }
@@ -187,7 +187,7 @@ export function WorkTimeCalculator() {
       {/* Money Confetti Animation */}
       {showConfetti && (
         <div className="fixed inset-0 pointer-events-none z-50 animate-in fade-in duration-300 animate-out fade-out duration-1000">
-          {[...Array(30)].map((_, i) => (
+          {Array.from({ length: 30 }).map((_, i) => (
             <div
               key={i}
               className="absolute"

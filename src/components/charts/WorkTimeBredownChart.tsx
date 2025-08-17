@@ -96,7 +96,11 @@ export function WorkTimeBreakdownChart({
                 cursor={false}
                 content={({ active, payload }) => {
                   if (active && payload && payload.length) {
-                    const data = payload[0].payload
+                    const data = payload[0].payload as {
+                      name: string
+                      value: number
+                      color: string
+                    }
                     return (
                       <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
                         <div className="flex items-center gap-2">
