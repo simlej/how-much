@@ -13,7 +13,7 @@ interface ChartContainerProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const ChartContainer = React.forwardRef<HTMLDivElement, ChartContainerProps>(
-  ({ className, config, ...props }, ref) => {
+  ({ className, ...props }, ref) => {
     return (
       <div
         ref={ref}
@@ -25,20 +25,21 @@ const ChartContainer = React.forwardRef<HTMLDivElement, ChartContainerProps>(
 )
 ChartContainer.displayName = "ChartContainer"
 
-interface ChartTooltipProps {
-  cursor?: boolean | object
-  content?: React.ReactElement
-}
-
-const ChartTooltip = (_props: ChartTooltipProps) => {
+const ChartTooltip = () => {
   // This is just a passthrough component for recharts
   return null
+}
+
+interface ChartPayload {
+  color: string
+  name: string
+  value: number | string
 }
 
 interface ChartTooltipContentProps {
   hideLabel?: boolean
   active?: boolean
-  payload?: any[]
+  payload?: ChartPayload[]
   label?: string
 }
 
@@ -57,7 +58,7 @@ const ChartTooltipContent = React.forwardRef<HTMLDivElement, ChartTooltipContent
         {!hideLabel && label && (
           <p className="font-medium text-gray-900 mb-2">{label}</p>
         )}
-        {payload.map((entry: any, index: number) => (
+        {payload.map((entry, index) => (
           <div key={index} className="flex items-center gap-2">
             <div
               className="w-3 h-3 rounded-sm"

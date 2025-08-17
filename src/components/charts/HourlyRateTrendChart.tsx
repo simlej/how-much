@@ -124,9 +124,15 @@ export function HourlyRateTrendChart({ history }: HourlyRateTrendChartProps) {
                 domain={['dataMin - 1', 'dataMax + 1']}
               />
               <Tooltip
-                content={({ active, payload }: any) => {
+                content={({ active, payload }) => {
                   if (active && payload && payload.length) {
-                    const data = payload[0].payload
+                    const data = payload[0].payload as {
+                      calculation: string
+                      hourlyRate: number
+                      itemPrice: number
+                      income: number
+                      fullDate: string
+                    }
                     return (
                       <div className="bg-white p-4 border border-gray-200 rounded-lg shadow-lg">
                         <p className="font-semibold text-slate-900 mb-2">{data.calculation}</p>

@@ -111,9 +111,14 @@ export function HistoryComparisonChart({ history }: HistoryComparisonChartProps)
                 tick={{ fontSize: 12, fill: '#64748b' }}
               />
               <Tooltip
-                content={({ active, payload }: any) => {
+                content={({ active, payload }) => {
                   if (active && payload && payload.length) {
-                    const data = payload[0].payload
+                    const data = payload[0].payload as {
+                      item: string
+                      workHours: number
+                      hourlyRate: number
+                      timestamp: string
+                    }
                     return (
                       <div className="bg-white p-4 border border-gray-200 rounded-lg shadow-lg">
                         <p className="font-semibold text-slate-900 mb-2">{data.item}</p>
